@@ -61,7 +61,7 @@ class Main
         }
 
         hashTable (int tableSize, int keySize, double loadFactor) {
-            this.tableSize = tableSize;
+            this.tableSize = getNextPrime(tableSize);
             this.keySize = keySize;
             this.primeMod = getNextPrime(tableSize);
             this.loadFactor = loadFactor;
@@ -103,11 +103,13 @@ class Main
     }
 
     public static void hashDisplaySize(hashTable hTable) {
-
+        System.out.println("Size is: " + hTable.tableSize);
     }
 
     public static void hashSearch(hashTable hTable, int key) {
-
+        if(hTable.hashList[key%hTable.primeMod] != 0) {
+            System.out.println("Key: " + key + " Returned: " + hTable.hashList[key%hTable.primeMod]);
+        }
     }
 
     public static void main(String[] args) {
@@ -126,12 +128,16 @@ class Main
             switch (commandArr[0]) {
                 case "insert":
                     hashInsert(hTable, Integer.parseInt(commandArr[1]));
+                    break;
                 case "displayStatus":
                     hashDisplay(hTable, Integer.parseInt(commandArr[1]));
+                    break;
                 case "tableSize":
                     hashDisplaySize(hTable);
+                    break;
                 case "search":
                     hashSearch(hTable, Integer.parseInt(commandArr[1]));
+                    break;
             }
 
         }
