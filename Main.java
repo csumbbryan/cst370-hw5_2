@@ -181,7 +181,7 @@ class Main
                 case "search":
                     hashSearch(hTable, Integer.parseInt(commandArr[1]));
                     break;
-                case "display":
+                case "displayAll":
                     hashDisplayAll(hTable);
                     break;
             }
