@@ -136,11 +136,15 @@ class Main
     public static void hashSearch(hashTable hTable, int key) {
         int index = key%hTable.primeMod;
         boolean isFound = true;
-        while(hTable.hashList[index] != key) {
-            index++;
-            if(hTable.hashList[index] == null) {
-                isFound = false;
-                break;
+        if(hTable.isEmptyByIndex(index)) {
+            isFound = false;
+        } else {
+            while (hTable.hashList[index] != key) {
+                index++;
+                if (hTable.hashList[index] == null) {
+                    isFound = false;
+                    break;
+                }
             }
         }
         if(isFound) {
