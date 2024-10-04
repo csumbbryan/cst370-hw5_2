@@ -35,8 +35,8 @@ class Main
             this.hashList = new int[this.primeMod];
         }
 
-        hashTable(int tableSize) {
-            this.tableSize = tableSize;
+        hashTable (int tableSize) {
+            this.tableSize = getNextPrime(tableSize);
             this.keySize = 0;
             this.primeMod = getNextPrime(tableSize);
             this.loadFactor = 0;
