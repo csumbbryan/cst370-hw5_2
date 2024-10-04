@@ -70,6 +70,7 @@ class Main
         hashTable(int tableSize) {
             this.tableSize = tableSize;
             this.keySize = 0;
+            this.primeMod = getNextPrime(tableSize);
             this.loadFactor = 0;
         }
 
@@ -83,6 +84,7 @@ class Main
 
 
     public static void hashInsert(hashTable hTable, int key) {
+        System.out.println("Key: " + key + " Prime Mod: " + hTable.primeMod);
         hTable.hashList.set(key%hTable.primeMod, key);
         hTable.increaseKeySize();
     }
@@ -103,10 +105,6 @@ class Main
     }
 
     public static void hashSearch(hashTable hTable, int key) {
-
-    }
-
-    public static void hashResize(hashTable hTable) {
 
     }
 
