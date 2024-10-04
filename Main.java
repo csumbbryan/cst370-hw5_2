@@ -29,7 +29,7 @@ class Main
 
         public void increaseKeySize() {
             this.keySize++;
-            this.loadFactor = this.keySize/this.tableSize;
+            this.loadFactor = (double)this.keySize/(double)this.tableSize;
             if(this.loadFactor > .5) {
                 this.resize();
             }
