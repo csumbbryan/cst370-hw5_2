@@ -146,7 +146,7 @@ class Main
         if(isFound) {
             System.out.println(hTable.hashList[index] + " Found");
         } else {
-            System.out.println(key + " Not Found");
+            System.out.println(key + " Not found");
         }
     }
 
