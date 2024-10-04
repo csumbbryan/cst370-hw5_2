@@ -27,39 +27,6 @@ class Main
         public double loadFactor;
         public int[] hashList;
 
-        public void increaseKeySize() {
-            this.keySize++;
-            this.loadFactor = (double)this.keySize/(double)this.tableSize;
-            if(this.loadFactor > .5) {
-                this.resize();
-            }
-        }
-
-        public static int getNextPrime(int number) {
-            int pNum = number;
-            for(int i = 2; i < pNum; i++) {
-                if(pNum%i == 0) {
-                    pNum++;
-                    i = 2;
-                }
-            }
-            return pNum;
-        }
-
-        public void resize() {
-            hashTable hTableTemp = new hashTable(this.tableSize * 2);
-            for(int i = 0; i < this.tableSize; i++) {
-                if (this.hashList[i] != 0) {
-                    hashInsert(hTableTemp, this.hashList[i]); //BE WARY OF LOOPS
-                }
-            }
-            this.hashList = hTableTemp.hashList;
-            this.tableSize = hTableTemp.tableSize;
-            this.keySize = hTableTemp.keySize;
-            this.primeMod = hTableTemp.primeMod;
-            this.loadFactor = hTableTemp.loadFactor;
-        }
-
         hashTable (int tableSize, int keySize, double loadFactor) {
             this.tableSize = getNextPrime(tableSize);
             this.keySize = keySize;
@@ -81,13 +48,66 @@ class Main
             this.keySize = 0;
             this.loadFactor = 0;
         }
+
+        public static int getNextPrime(int number) {
+            int pNum = number;
+            for(int i = 2; i < pNum; i++) {
+                if(pNum%i == 0) {
+                    pNum++;
+                    i = 2;
+                }
+            }
+            return pNum;
+        }
+
+        public boolean isEmptyByKey(int key) {
+            if(this.hashList[key%this.primeMod] == 0) {
+                return true;
+            }
+            return false;
+        }
+
+        public boolean isEmptyByIndex(int index) {
+            if(this.hashList[index] == 0) {
+                return true;
+            }
+            return false;
+        }
+
+        public void increaseKeySize() {
+            this.keySize++;
+            this.loadFactor = (double)this.keySize/(double)this.tableSize;
+            if(this.loadFactor > .5) {
+                this.resize();
+            }
+        }
+
+        public void resize() {
+            hashTable hTableTemp = new hashTable(this.tableSize * 2);
+            for(int i = 0; i < this.tableSize; i++) {
+                if (this.hashList[i] != 0) {
+                    hashInsert(hTableTemp, this.hashList[i]); //BE WARY OF LOOPS
+                }
+            }
+            this.hashList = hTableTemp.hashList;
+            this.tableSize = hTableTemp.tableSize;
+            this.keySize = hTableTemp.keySize;
+            this.primeMod = hTableTemp.primeMod;
+            this.loadFactor = hTableTemp.loadFactor;
+        }
+
     }
 
 
 
     public static void hashInsert(hashTable hTable, int key) {
         System.out.println("Key: " + key + " Prime Mod: " + hTable.primeMod);
-        hTable.hashList[key%hTable.primeMod] = key;
+        int index = key% hTable.primeMod;
+        while(!hTable.isEmptyByIndex(index)) {
+            index++;
+        }
+
+        hTable.hashList[index] = key;
         hTable.increaseKeySize();
     }
 
