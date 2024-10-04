@@ -25,14 +25,14 @@ class Main
         public int keySize;
         public int primeMod;
         public double loadFactor;
-        public int[] hashList;
+        public Integer[] hashList;
 
         hashTable (int tableSize, int keySize, double loadFactor) {
             this.tableSize = getNextPrime(tableSize);
             this.keySize = keySize;
             this.primeMod = getNextPrime(tableSize);
             this.loadFactor = loadFactor;
-            this.hashList = new int[this.primeMod];
+            this.hashList = new Integer[this.primeMod];
         }
 
         hashTable (int tableSize) {
@@ -40,7 +40,7 @@ class Main
             this.keySize = 0;
             this.primeMod = getNextPrime(tableSize);
             this.loadFactor = 0;
-            this.hashList = new int[this.primeMod];
+            this.hashList = new Integer[this.primeMod];
         }
 
         hashTable () {
@@ -61,14 +61,14 @@ class Main
         }
 
         public boolean isEmptyByKey(int key) {
-            if(this.hashList[key%this.primeMod] == 0) {
+            if(this.hashList[key%this.primeMod] == null) {
                 return true;
             }
             return false;
         }
 
         public boolean isEmptyByIndex(int index) {
-            if(this.hashList[index] == 0) {
+            if(this.hashList[index] == null) {
                 return true;
             }
             return false;
@@ -85,7 +85,7 @@ class Main
         public void resize() {
             hashTable hTableTemp = new hashTable(this.tableSize * 2);
             for(int i = 0; i < this.tableSize; i++) {
-                if (this.hashList[i] != 0) {
+                if (this.hashList[i] != null) {
                     hashInsert(hTableTemp, this.hashList[i]); //BE WARY OF LOOPS
                 }
             }
@@ -112,7 +112,7 @@ class Main
     }
 
     public static void hashDisplay(hashTable hTable, int index) {
-        if (hTable.hashList[index] == 0) {
+        if (hTable.hashList[index] == null) {
             System.out.println("Empty");
         } else {
             System.out.println(hTable.hashList[index]);
@@ -138,7 +138,7 @@ class Main
         boolean isFound = true;
         while(hTable.hashList[index] != key) {
             index++;
-            if(hTable.hashList[index] == 0) {
+            if(hTable.hashList[index] == null) {
                 isFound = false;
                 break;
             }
