@@ -36,7 +36,7 @@ class Main
         }
 
         public static int getNextPrime(int number) {
-            int pNum = number + 1;
+            int pNum = number;
             for(int i = 2; i < pNum; i++) {
                 if(pNum%i == 0) {
                     pNum++;
