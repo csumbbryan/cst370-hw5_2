@@ -130,7 +130,7 @@ class Main
     }
 
     public static void hashDisplaySize(hashTable hTable) {
-        System.out.println("Size is: " + hTable.tableSize);
+        System.out.println(hTable.tableSize);
     }
 
     public static void hashSearch(hashTable hTable, int key) {
