@@ -101,7 +101,7 @@ class Main
 
 
     public static void hashInsert(hashTable hTable, int key) {
-        System.out.println("Key: " + key + " Prime Mod: " + hTable.primeMod);
+        //System.out.println("Key: " + key + " Prime Mod: " + hTable.primeMod);
         int index = key% hTable.primeMod;
         while(!hTable.isEmptyByIndex(index)) {
             index++;
@@ -112,6 +112,22 @@ class Main
     }
 
     public static void hashDisplay(hashTable hTable, int key) {
+        int index = key%hTable.primeMod;
+        boolean isFound = true;
+        while(hTable.hashList[index] != key) {
+            index++;
+            if(hTable.hashList[index] == 0) {
+                isFound = false;
+                break;
+            }
+        }
+        if(isFound) {
+            System.out.println(hTable.hashList[index]);
+        } else {
+            System.out.println("Empty");
+        }
+
+        /*
         for(int i = 0; i < hTable.tableSize; i++) {
             if (hTable.hashList[i] != 0) {
                 System.out.println(i + " - " + hTable.hashList[i]);
@@ -119,7 +135,7 @@ class Main
             } else {
                 System.out.println(i + " - Empty");
             }
-        }
+        }*/
     }
 
     public static void hashDisplaySize(hashTable hTable) {
