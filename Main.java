@@ -117,20 +117,21 @@ class Main
         } else {
             System.out.println(hTable.hashList[index]);
         }
+    }
 
-        /*
+    public static void hashDisplaySize(hashTable hTable) {
+        System.out.println(hTable.tableSize);
+    }
+
+    public static void hashDisplayAll(hashTable hTable) {
         for(int i = 0; i < hTable.tableSize; i++) {
-            if (hTable.hashList[i] != 0) {
+            if (hTable.hashList[i] != null) {
                 System.out.println(i + " - " + hTable.hashList[i]);
 
             } else {
                 System.out.println(i + " - Empty");
             }
-        }*/
-    }
-
-    public static void hashDisplaySize(hashTable hTable) {
-        System.out.println(hTable.tableSize);
+        }
     }
 
     public static void hashSearch(hashTable hTable, int key) {
@@ -179,6 +180,9 @@ class Main
                     break;
                 case "search":
                     hashSearch(hTable, Integer.parseInt(commandArr[1]));
+                    break;
+                case "display":
+                    hashDisplayAll(hTable);
                     break;
             }
 
