@@ -111,20 +111,11 @@ class Main
         hTable.increaseKeySize();
     }
 
-    public static void hashDisplay(hashTable hTable, int key) {
-        int index = key%hTable.primeMod;
-        boolean isFound = true;
-        while(hTable.hashList[index] != key) {
-            index++;
-            if(hTable.hashList[index] == 0) {
-                isFound = false;
-                break;
-            }
-        }
-        if(isFound) {
-            System.out.println(hTable.hashList[index]);
-        } else {
+    public static void hashDisplay(hashTable hTable, int index) {
+        if (hTable.hashList[index] == 0) {
             System.out.println("Empty");
+        } else {
+            System.out.println(hTable.hashList[index]);
         }
 
         /*
@@ -143,8 +134,19 @@ class Main
     }
 
     public static void hashSearch(hashTable hTable, int key) {
-        if(hTable.hashList[key%hTable.primeMod] != 0) {
-            System.out.println("Key: " + key + " Returned: " + hTable.hashList[key%hTable.primeMod]);
+        int index = key%hTable.primeMod;
+        boolean isFound = true;
+        while(hTable.hashList[index] != key) {
+            index++;
+            if(hTable.hashList[index] == 0) {
+                isFound = false;
+                break;
+            }
+        }
+        if(isFound) {
+            System.out.println(hTable.hashList[index] + " Found");
+        } else {
+            System.out.println(key + " Not Found");
         }
     }
 
