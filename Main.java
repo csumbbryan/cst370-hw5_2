@@ -25,7 +25,7 @@ class Main
         public int keySize;
         public int primeMod;
         public double loadFactor;
-        public ArrayList<Integer> hashList = new ArrayList<>();
+        public int[] hashList;
 
         public void increaseKeySize() {
             this.keySize++;
@@ -49,8 +49,8 @@ class Main
         public void resize() {
             hashTable hTableTemp = new hashTable(this.tableSize * 2);
             for(int i = 0; i < this.tableSize; i++) {
-                if (this.hashList.get(i) != null) {
-                    hashInsert(hTableTemp, this.hashList.get(i)); //BE WARY OF LOOPS
+                if (this.hashList[i] != 0) {
+                    hashInsert(hTableTemp, this.hashList[i]); //BE WARY OF LOOPS
                 }
             }
             this.hashList = hTableTemp.hashList;
@@ -65,6 +65,7 @@ class Main
             this.keySize = keySize;
             this.primeMod = getNextPrime(tableSize);
             this.loadFactor = loadFactor;
+            this.hashList = new int[this.primeMod];
         }
 
         hashTable(int tableSize) {
@@ -72,6 +73,7 @@ class Main
             this.keySize = 0;
             this.primeMod = getNextPrime(tableSize);
             this.loadFactor = 0;
+            this.hashList = new int[this.primeMod];
         }
 
         hashTable () {
@@ -85,14 +87,14 @@ class Main
 
     public static void hashInsert(hashTable hTable, int key) {
         System.out.println("Key: " + key + " Prime Mod: " + hTable.primeMod);
-        hTable.hashList.set(key%hTable.primeMod, key);
+        hTable.hashList[key%hTable.primeMod] = key;
         hTable.increaseKeySize();
     }
 
     public static void hashDisplay(hashTable hTable, int key) {
-        for(int i = 0; i < hTable.hashList.size(); i++) {
-            if (hTable.hashList.get(i) != null) {
-                System.out.println(i + " - " + hTable.hashList.get(i));
+        for(int i = 0; i < hTable.tableSize; i++) {
+            if (hTable.hashList[i] != 0) {
+                System.out.println(i + " - " + hTable.hashList[i]);
 
             } else {
                 System.out.println(i + " - Empty");
