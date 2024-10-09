@@ -84,6 +84,15 @@ class Main
             }
         }
 
+        public void addKey(int key) {
+            int index = key% this.tableSize;
+            while(!this.isEmptyByIndex(index)) {
+                index++;
+            }
+            this.hashList[index] = key;
+            this.increaseKeySize();
+        }
+
         public void resize() {
             hashTable hTableTemp = new hashTable(this.tableSize * 2);
             for(int i = 0; i < this.tableSize; i++) {
@@ -97,13 +106,13 @@ class Main
             //this.primeMod = hTableTemp.primeMod;
             this.loadFactor = hTableTemp.loadFactor;
         }
-
     }
 
 
 
     public static void hashInsert(hashTable hTable, int key) {
         //System.out.println("Key: " + key + " Prime Mod: " + hTable.primeMod);
+        /*
         int index = key% hTable.tableSize;
         while(!hTable.isEmptyByIndex(index)) {
             index++;
@@ -111,6 +120,8 @@ class Main
 
         hTable.hashList[index] = key;
         hTable.increaseKeySize();
+         */
+        hTable.addKey(key);
     }
 
     public static void hashDisplay(hashTable hTable, int index) {
