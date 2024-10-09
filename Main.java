@@ -22,11 +22,11 @@ class Main
 {
 
     public static class HashTable {
-        public int tableSize;
-        public int keySize;
+        private int tableSize;
+        private int keySize;
         //public int primeMod;
-        public double loadFactor;
-        public Integer[] hashList;
+        private double loadFactor;
+        private Integer[] hashList;
 
         HashTable(int tableSize, int keySize, double loadFactor) {
             if(tableSize == 0) {
@@ -35,7 +35,6 @@ class Main
                 this.tableSize = getNextPrime(tableSize);
             }
             this.keySize = keySize;
-            //this.primeMod = getNextPrime(tableSize);
             this.loadFactor = loadFactor;
             this.hashList = new Integer[this.tableSize];
         }
@@ -47,7 +46,6 @@ class Main
                 this.tableSize = getNextPrime(tableSize);
             }
             this.keySize = 0;
-            //this.primeMod = getNextPrime(tableSize);
             this.loadFactor = 0;
             this.hashList = new Integer[this.tableSize];
         }
@@ -78,27 +76,22 @@ class Main
         }
 
         public boolean isEmptyByKey(int key) {
-            if(this.hashList[key%this.tableSize] == null) {
-                return true;
-            }
-            return false;
+            return this.hashList[key % this.tableSize] == null;
         }
 
         public boolean isEmptyByIndex(int index) {
-          return this.hashList[index] == null;
+            return this.hashList[index] == null;
         }
 
         public void increaseKeySize() {
             this.keySize++;
-            System.out.println("Table Size: " + this.tableSize);
-            this.loadFactor = this.tableSize == 0 ? 0 : (double)this.keySize/(double)this.tableSize;
+            this.loadFactor = (double)this.keySize/(double)this.tableSize;
             if(this.loadFactor > .5 || this.keySize > this.tableSize) {
                 this.resize();
             }
         }
 
         public void addKey(int key) {
-            System.out.println("Table Size: " + this.tableSize);
             int index = key% this.tableSize;
             while(!this.isEmptyByIndex(index)) {
                 index++;
