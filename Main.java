@@ -62,6 +62,10 @@ class Main
             return pNum;
         }
 
+        public int getTableSize() {
+            return this.tableSize;
+        }
+
         public boolean isEmptyByKey(int key) {
             if(this.hashList[key%this.tableSize] == null) {
                 return true;
@@ -133,7 +137,7 @@ class Main
     }
 
     public static void hashDisplaySize(hashTable hTable) {
-        System.out.println(hTable.tableSize);
+        System.out.println(hTable.getTableSize());
     }
 
     public static void hashDisplayAll(hashTable hTable) {
