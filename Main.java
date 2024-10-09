@@ -153,21 +153,21 @@ class Main
     }
 
     public static void hashSearch(hashTable hTable, int key) {
-        int index = key%hTable.tableSize;
+        int index = key% hTable.getTableSize();
         boolean isFound = true;
         if(hTable.isEmptyByIndex(index)) {
             isFound = false;
         } else {
-            while (hTable.hashList[index] != key) {
+            while (hTable.getKeyByIndex(index) != key) {
                 index++;
-                if (hTable.hashList[index] == null) {
+                if (hTable.isEmptyByIndex(index)) {
                     isFound = false;
                     break;
                 }
             }
         }
         if(isFound) {
-            System.out.println(hTable.hashList[index] + " Found");
+            System.out.println(key + " Found");
         } else {
             System.out.println(key + " Not found");
         }
