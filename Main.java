@@ -16,20 +16,19 @@
  * Date: 10/08/2024
  */
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 class Main
 {
 
-    public static class hashTable {
+    public static class HashTable {
         public int tableSize;
         public int keySize;
         //public int primeMod;
         public double loadFactor;
         public Integer[] hashList;
 
-        hashTable (int tableSize, int keySize, double loadFactor) {
+        HashTable(int tableSize, int keySize, double loadFactor) {
             this.tableSize = getNextPrime(tableSize);
             this.keySize = keySize;
             //this.primeMod = getNextPrime(tableSize);
@@ -37,7 +36,7 @@ class Main
             this.hashList = new Integer[this.tableSize];
         }
 
-        hashTable (int tableSize) {
+        HashTable(int tableSize) {
             this.tableSize = getNextPrime(tableSize);
             this.keySize = 0;
             //this.primeMod = getNextPrime(tableSize);
@@ -45,7 +44,7 @@ class Main
             this.hashList = new Integer[this.tableSize];
         }
 
-        hashTable () {
+        HashTable() {
             this.tableSize = 0;
             this.keySize = 0;
             this.loadFactor = 0;
@@ -99,7 +98,7 @@ class Main
         }
 
         public void resize() {
-            hashTable hTableTemp = new hashTable(this.tableSize * 2);
+            HashTable hTableTemp = new HashTable(this.tableSize * 2);
             for(int i = 0; i < this.tableSize; i++) {
                 if (this.hashList[i] != null) {
                     hashInsert(hTableTemp, this.hashList[i]); //BE WARY OF LOOPS
@@ -115,7 +114,7 @@ class Main
 
 
 
-    public static void hashInsert(hashTable hTable, int key) {
+    public static void hashInsert(HashTable hTable, int key) {
         //System.out.println("Key: " + key + " Prime Mod: " + hTable.primeMod);
         /*
         int index = key% hTable.tableSize;
@@ -129,7 +128,7 @@ class Main
         hTable.addKey(key);
     }
 
-    public static void hashDisplay(hashTable hTable, int index) {
+    public static void hashDisplay(HashTable hTable, int index) {
         if (hTable.isEmptyByIndex(index)) {
             System.out.println("Empty");
         } else {
@@ -137,11 +136,11 @@ class Main
         }
     }
 
-    public static void hashDisplaySize(hashTable hTable) {
+    public static void hashDisplaySize(HashTable hTable) {
         System.out.println(hTable.getTableSize());
     }
 
-    public static void hashDisplayAll(hashTable hTable) {
+    public static void hashDisplayAll(HashTable hTable) {
         for(int i = 0; i < hTable.getTableSize(); i++) {
             if (!hTable.isEmptyByIndex(i)) {
                 System.out.println(i + " - " + hTable.getKeyByIndex(i));
@@ -152,7 +151,7 @@ class Main
         }
     }
 
-    public static void hashSearch(hashTable hTable, int key) {
+    public static void hashSearch(HashTable hTable, int key) {
         int index = key% hTable.getTableSize();
         boolean isFound = true;
         if(hTable.isEmptyByIndex(index)) {
@@ -182,7 +181,7 @@ class Main
         int keySize = 0;
         double loadFactor =0.0;
 
-        hashTable hTable = new hashTable(tableSize, keySize, loadFactor);
+        HashTable hTable = new HashTable(tableSize, keySize, loadFactor);
 
         for(int i = 0; i < commandCount; i++) {
             String[] commandArr = scanner.nextLine().split(" ");
