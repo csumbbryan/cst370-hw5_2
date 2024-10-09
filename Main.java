@@ -115,19 +115,7 @@ class Main
         }
     }
 
-
-
     public static void hashInsert(HashTable hTable, int key) {
-        //System.out.println("Key: " + key + " Prime Mod: " + hTable.primeMod);
-        /*
-        int index = key% hTable.tableSize;
-        while(!hTable.isEmptyByIndex(index)) {
-            index++;
-        }
-
-        hTable.hashList[index] = key;
-        hTable.increaseKeySize();
-         */
         hTable.addKey(key);
     }
 
@@ -147,7 +135,6 @@ class Main
         for(int i = 0; i < hTable.getTableSize(); i++) {
             if (!hTable.isEmptyByIndex(i)) {
                 System.out.println(i + " - " + hTable.getKeyByIndex(i));
-
             } else {
                 System.out.println(i + " - Empty");
             }
@@ -205,10 +192,7 @@ class Main
                     hashDisplayAll(hTable);
                     break;
             }
-
         }
-
-
     }
 }
 
