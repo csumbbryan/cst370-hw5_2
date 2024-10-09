@@ -90,6 +90,7 @@ class Main
         }
 
         public void addKey(int key) {
+            System.out.println("Table Size: " + this.tableSize);
             int index = key% this.tableSize;
             while(!this.isEmptyByIndex(index)) {
                 index++;
