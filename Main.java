@@ -9,9 +9,11 @@
 
 // Finish the head comment with Abstract, Name, and Date.
 /*
- * Abstract: Describe the main ideas of the program.
- * Name: Write your name
- * Date: MM/DD/YYYY
+ * Abstract: Program accepts input from user to create and update hash tables based on a series of
+ * instructions. The initial hash table is set by a defined hash table size, then expanded as needed based on
+ * the load factor. Instructions allow insertion and retrieval of the hash table and its keys.
+ * Name: Bryan Zanoli
+ * Date: 10/08/2024
  */
 
 import java.util.ArrayList;
@@ -23,24 +25,24 @@ class Main
     public static class hashTable {
         public int tableSize;
         public int keySize;
-        public int primeMod;
+        //public int primeMod;
         public double loadFactor;
         public Integer[] hashList;
 
         hashTable (int tableSize, int keySize, double loadFactor) {
             this.tableSize = getNextPrime(tableSize);
             this.keySize = keySize;
-            this.primeMod = getNextPrime(tableSize);
+            //this.primeMod = getNextPrime(tableSize);
             this.loadFactor = loadFactor;
-            this.hashList = new Integer[this.primeMod];
+            this.hashList = new Integer[this.tableSize];
         }
 
         hashTable (int tableSize) {
             this.tableSize = getNextPrime(tableSize);
             this.keySize = 0;
-            this.primeMod = getNextPrime(tableSize);
+            //this.primeMod = getNextPrime(tableSize);
             this.loadFactor = 0;
-            this.hashList = new Integer[this.primeMod];
+            this.hashList = new Integer[this.tableSize];
         }
 
         hashTable () {
@@ -61,7 +63,7 @@ class Main
         }
 
         public boolean isEmptyByKey(int key) {
-            if(this.hashList[key%this.primeMod] == null) {
+            if(this.hashList[key%this.tableSize] == null) {
                 return true;
             }
             return false;
@@ -92,7 +94,7 @@ class Main
             this.hashList = hTableTemp.hashList;
             this.tableSize = hTableTemp.tableSize;
             this.keySize = hTableTemp.keySize;
-            this.primeMod = hTableTemp.primeMod;
+            //this.primeMod = hTableTemp.primeMod;
             this.loadFactor = hTableTemp.loadFactor;
         }
 
@@ -102,7 +104,7 @@ class Main
 
     public static void hashInsert(hashTable hTable, int key) {
         //System.out.println("Key: " + key + " Prime Mod: " + hTable.primeMod);
-        int index = key% hTable.primeMod;
+        int index = key% hTable.tableSize;
         while(!hTable.isEmptyByIndex(index)) {
             index++;
         }
@@ -135,7 +137,7 @@ class Main
     }
 
     public static void hashSearch(hashTable hTable, int key) {
-        int index = key%hTable.primeMod;
+        int index = key%hTable.tableSize;
         boolean isFound = true;
         if(hTable.isEmptyByIndex(index)) {
             isFound = false;
