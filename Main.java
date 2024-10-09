@@ -29,7 +29,11 @@ class Main
         public Integer[] hashList;
 
         HashTable(int tableSize, int keySize, double loadFactor) {
-            this.tableSize = getNextPrime(tableSize);
+            if(tableSize == 0) {
+                this.tableSize = 1;
+            } else {
+                this.tableSize = getNextPrime(tableSize);
+            }
             this.keySize = keySize;
             //this.primeMod = getNextPrime(tableSize);
             this.loadFactor = loadFactor;
@@ -37,7 +41,11 @@ class Main
         }
 
         HashTable(int tableSize) {
-            this.tableSize = getNextPrime(tableSize);
+            if(tableSize == 0) {
+                this.tableSize = 1;
+            } else {
+                this.tableSize = getNextPrime(tableSize);
+            }
             this.keySize = 0;
             //this.primeMod = getNextPrime(tableSize);
             this.loadFactor = 0;
