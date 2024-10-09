@@ -78,10 +78,7 @@ class Main
         }
 
         public boolean isEmptyByIndex(int index) {
-            if(this.hashList[index] == null) {
-                return true;
-            }
-            return false;
+          return this.hashList[index] == null;
         }
 
         public void increaseKeySize() {
@@ -145,9 +142,9 @@ class Main
     }
 
     public static void hashDisplayAll(hashTable hTable) {
-        for(int i = 0; i < hTable.tableSize; i++) {
-            if (hTable.hashList[i] != null) {
-                System.out.println(i + " - " + hTable.hashList[i]);
+        for(int i = 0; i < hTable.getTableSize(); i++) {
+            if (!hTable.isEmptyByIndex(i)) {
+                System.out.println(i + " - " + hTable.getKeyByIndex(i));
 
             } else {
                 System.out.println(i + " - Empty");
