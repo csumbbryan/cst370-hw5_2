@@ -82,8 +82,9 @@ class Main
 
         public void increaseKeySize() {
             this.keySize++;
+            System.out.println("Table Size: " + this.tableSize);
             this.loadFactor = this.tableSize == 0 ? 0 : (double)this.keySize/(double)this.tableSize;
-            if(this.loadFactor > .5) {
+            if(this.loadFactor > .5 || this.keySize > this.tableSize) {
                 this.resize();
             }
         }
