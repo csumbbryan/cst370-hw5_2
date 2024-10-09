@@ -66,6 +66,10 @@ class Main
             return this.tableSize;
         }
 
+        public int getKeyByIndex(int index) {
+            return this.hashList[index];
+        }
+
         public boolean isEmptyByKey(int key) {
             if(this.hashList[key%this.tableSize] == null) {
                 return true;
@@ -129,10 +133,10 @@ class Main
     }
 
     public static void hashDisplay(hashTable hTable, int index) {
-        if (hTable.hashList[index] == null) {
+        if (hTable.isEmptyByIndex(index)) {
             System.out.println("Empty");
         } else {
-            System.out.println(hTable.hashList[index]);
+            System.out.println(hTable.getKeyByIndex(index));
         }
     }
 
